@@ -16,13 +16,23 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
+                'institution' => null,
+                'name' => 'John Doe',
+                'email' => 'admin@example.com',
+                'password' => bcrypt('password'), 
+                'email_verified_at' => now(), 
+                'remember_token' => null, 
+                'created_at' => now(), 
+                'updated_at' => now(), 
+            ],
+            [
                 'institution' => 'UPLB',
                 'name' => 'John Doe',
                 'email' => 'john.doe@example.com',
                 'password' => bcrypt('password'), 
                 'email_verified_at' => now(), 
                 'remember_token' => null, 
-                'created_at' => now(), 
+                'created_at' => now(),  
                 'updated_at' => now(), 
             ],
             [

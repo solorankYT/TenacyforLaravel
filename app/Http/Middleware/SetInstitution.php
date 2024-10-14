@@ -4,28 +4,27 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\Institution;
 
 class SetInstitution
 {
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()) {
-            
-            $institutionKey = $request->user()->institution;
+        $user = $request->user();
 
-            
-            $institution = Institution::where('institution', $institutionKey)->first();
-
-            if ($institution) { 
-                // Set the institution on the request attributes
-                $request->attributes->set('institution', $institution);
+        if ($user) {
+            // Check if the institution is null (consider as Super Admin)
+            if (is_null($user->institution)) {
+                // Super Admin, grant access to all institutions
+                $request->attributes->set('institution', 'all');
             } else {
-                Log::warning('No institution found for user', [
-                    'institution_key' => $institutionKey,
-                ]);
+                // Regular user, set their institution
+                $request->attributes->set('institution', $user->institution);
             }
         }
 

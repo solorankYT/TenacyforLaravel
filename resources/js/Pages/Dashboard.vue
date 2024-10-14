@@ -11,8 +11,7 @@
                         You're logged in!
                     </div>
                     <div class="p-6 text-gray-900">
-                        <!-- Display the institution associated with the user -->
-                        Welcom to  {{ institution ? institution.institution : 'No institution data available' }}
+                        Institution: {{ institution === 'Super Admin: Access to all institutions' ? institution : institution.institution }}
                     </div>
                 </div>
             </div>
@@ -25,6 +24,6 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 // Accept institution prop
 defineProps({
-    institution: Object
+    institution: [Object, String]  // Handle either string for Super Admin or object for regular users
 });
 </script>

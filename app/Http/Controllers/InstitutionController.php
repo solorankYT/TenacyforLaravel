@@ -36,7 +36,7 @@ class InstitutionController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            // Add other fields as necessary
+            
         ]);
 
         $institution = Institution::findOrFail($id);

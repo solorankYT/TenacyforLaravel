@@ -20,10 +20,18 @@ Route::get('/', function () {
 Route::middleware(['auth', SetInstitution::class])->group(function () {
 
     Route::get('/dashboard', function (Request $request) {
-        // Retrieve the institution set by the middleware
+        // Get the institution set by the middleware
         $institution = $request->attributes->get('institution');
     
-        // Pass the institution data to the dashboard view
+        // If institution is 'all', user is Super Admin
+        if ($institution === 'all') {
+            return Inertia::render('Dashboard', [
+                'institution' => 'Super Admin: Access to all institutions',
+                
+            ]);
+        }
+    
+        // For regular users, show their institution
         return Inertia::render('Dashboard', [
             'institution' => $institution,
         ]);

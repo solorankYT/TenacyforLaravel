@@ -33,11 +33,10 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'edupid' => $request->edupid,
             'roles' => json_encode($request->roles),
-            'institution_id' => $request->institution_id, // Associate the user with an institution
+            'institution_id' => $request->institution_id, 
         ]);
 
         return response()->json($user, 201);
     }
 
-    // Other methods (show, update, destroy) would follow a similar pattern...
 }
