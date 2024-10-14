@@ -28,18 +28,18 @@ const showingNavigationDropdown = ref(false);
                             </div>
 
                             <!-- Navigation Links -->
-                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                Dashboard
-                            </NavLink>
-                            <NavLink :href="route('roles')" :active="route().current('roles')">
-                                Roles
-                            </NavLink>
-                            <NavLink :href="route('permissions')" :active="route().current('permissions')">
-                                Permissions
-                            </NavLink>
-                        </div>
-                        </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                    Dashboard
+                                </NavLink>
+                                <NavLink :href="route('roles.index')" :active="route().current('roles.index')">
+                                    Roles
+                                </NavLink>
+                                <NavLink :href="route('permissions.index')" :active="route().current('permissions.index')">
+                                    Permissions
+                                </NavLink>
+                            </div>
+                            </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
                             <!-- Settings Dropdown -->
