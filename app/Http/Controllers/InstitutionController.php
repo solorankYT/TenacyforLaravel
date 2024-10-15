@@ -2,16 +2,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Institution;
+use Inertia\Inertia;
+
 use Illuminate\Http\Request;
 
 class InstitutionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Fetch institutions based on the authenticated user's institution
-        $tenant = request()->attributes->get('tenant');
-        return Institution::where('institution', $tenant)->get();
+        $user = $request->user();
+    
+        if ($user->hasRole('superadmin')) {
+            $institutions = Institution::all();
+        } else {
+            $institutions = Institution::where('institution', $user->institution)->get();
+        }
+    
+        return Inertia::render('Institutions/Index', [
+            'institutions' => $institutions,
+        ]);
     }
+    
 
     public function show($id)
     {

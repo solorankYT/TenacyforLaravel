@@ -20,13 +20,13 @@ const role = ref({
 });
 
 const updateRole = async () => {
-    await router.put(`/admin/usermanagement/roles/${role.value.id}`, {name: role.value.name, permissions: role.value.permissions,});
+    await router.put(`/roles/${role.value.id}`, {name: role.value.name, permissions: role.value.permissions,});
 };
 
 const handleCancel = () => {
   console.log('Cancel button clicked'); // Debug log
   if (confirm('Are you sure you want to discard the form?')) {
-  window.location.href = '/admin/usermanagement/roles'; 
+  window.location.href = '/roles'; 
   }
 };
 

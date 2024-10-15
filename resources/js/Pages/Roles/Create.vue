@@ -17,13 +17,13 @@
     permissions: [],
   });
 
-  const errorMessage = ref(null); // To hold error messages
+  const errorMessage = ref(null);
 
   const createRole = async () => {
     errorMessage.value = null; 
 
     try {
-      await router.post('/admin/usermanagement/roles', role.value);
+      await router.post('/roles', role.value);
       role.value = { name: '', permissions: [] }; 
     } catch (error) {
       errorMessage.value = error.response?.data?.message || 'Failed to create role';
@@ -41,7 +41,7 @@ const handleCancel = () => {
   console.log('Cancel button clicked'); // Debug log
   if (confirm('Are you sure you want to discard the form?')) {
     clearForm();
-    window.location.href = '/admin/usermanagement/roles';
+    window.location.href = '/roles';
   }
 };
 

@@ -15,7 +15,7 @@ const props = defineProps({
 
 const deleteRole = async (id) => {
   if (confirm('Are you sure you want to delete this role?')) {
-    await router.delete(`/admin/usermanagement/roles/${id}`);
+    await router.delete(`/roles/${id}`);
   }
 };
 </script>
@@ -33,7 +33,7 @@ const deleteRole = async (id) => {
       <div class="p-4">
 
       <CreateButton>
-        <a :href="`/admin/usermanagement/roles/create`">
+        <a :href="`/roles/create`">
           Create New Role
         </a>
       </CreateButton>
@@ -61,7 +61,7 @@ const deleteRole = async (id) => {
 
               <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
               <EditButton>
-                <a :href="`/admin/usermanagement/roles/${role.id}/edit`">Edit</a>
+                <a :href="`/roles/${role.id}/edit`">Edit</a>
               </EditButton>
 
               <DeleteButton>

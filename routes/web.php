@@ -24,21 +24,22 @@ Route::middleware(['auth', SetInstitution::class])->group(function () {
     Route::get('/dashboard', function (Request $request) {
         // Get the institution set by the middleware
         $institution = $request->attributes->get('institution');
-    
-        // If institution is 'all', user is Super 
-        if ($institution === 'all') {
+        
+        // If institution is null, user is a Super Admin
+        if ($institution === null) {
             return Inertia::render('Dashboard', [
-                'institution' => 'Super : Access to all institutions',
-                
+                'institution' => 'Super Admin: Access to all institutions',
             ]);
         }
     
-        // For regular users, show their institution
+        // For regular users, show their institution data
         return Inertia::render('Dashboard', [
             'institution' => $institution,
         ]);
     })->middleware(['auth', SetInstitution::class])->name('dashboard');
+    
 
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

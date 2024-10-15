@@ -37,7 +37,6 @@ class User extends Authenticatable
             $institution = request()->attributes->get('institution');
     
             if ($institution) {
-                // Assuming 'institution' is the name of the field in the users table
                 $builder->where('institution', $institution->institution); 
             }
         });

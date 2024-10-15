@@ -11,7 +11,13 @@
                         You're logged in!
                     </div>
                     <div class="p-6 text-gray-900">
-                        Institution: {{ institution === 'Super Admin: Access to all institutions' ? institution : institution.institution }}
+                        Institution: {{ typeof institution === 'string' ? institution : institution.name }}
+                    </div>
+                    <div v-if="institution === 'Super Admin'">
+                        <p>Access to all institutions:</p>
+                        <ul>
+                            <li v-for="inst in allInstitutions" :key="inst.id">{{ inst.name }}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -21,9 +27,10 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { ref } from 'vue';
 
-// Accept institution prop
 defineProps({
-    institution: [Object, String]  // Handle either string for Super Admin or object for regular users
+    institution: [Object, String], 
+    allInstitutions: Array, 
 });
 </script>
